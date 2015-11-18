@@ -1,7 +1,7 @@
 Summary:	Usermode tools for VmWare virts
 Name:		open-vm-tools
 Version:	10.0.0
-Release:	11%{?dist}
+Release:	12%{?dist}
 License:	LGPLv2+
 URL:		https://github.com/vmware/open-vm-tools
 Group:		Applications/System
@@ -68,7 +68,7 @@ cat >> %{buildroot}/lib/systemd/system/vmtoolsd.service <<-EOF
 Description=Service for virtual machines hosted on VMware
 Documentation=http://open-vm-tools.sourceforge.net/about.php
 ConditionVirtualization=vmware
-After=cloud-final.service
+After=cloud-final.service network-online.target
 
 [Service]
 ExecStart=/usr/bin/vmtoolsd
@@ -109,6 +109,8 @@ rm -f /sbin/mount.vmhgfs
 
 
 %changelog
+*       Wed Nov 18 2015 Kumar Kaushik <kaushikk@vmware.com> 10.0.0-12
+-       Making oprn-vm-tools to start after network online.
 *       Tue Sep 15 2015 Kumar Kaushik <kaushikk@vmware.com> 10.0.0-11
 -       Adding ssh RSA public support for password-less login.
 *       Wed Sep 09 2015 Kumar Kaushik <kaushikk@vmware.com> 10.0.0-10
